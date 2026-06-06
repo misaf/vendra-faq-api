@@ -23,7 +23,7 @@
 		"source": "https://github.com/misaf/vendra-faq-api"
 	},
 	"require": {
-		"php": "^8.2",
+		"php": "^8.3",
 		"illuminate/support": "^12.0 || ^13.0",
 		"misaf/vendra-api": "dev-master",
 		"misaf/vendra-faq": "dev-master",
