@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Misaf\VendraFaqApi\JsonApi\V1\Faqs;
 
-use App\Traits\LocalizableAttributesTrait;
 use LaravelJsonApi\Core\Resources\JsonApiResource;
 
 final class FaqResource extends JsonApiResource
 {
-    use LocalizableAttributesTrait;
-
     public function attributes($request): iterable
     {
         return [
