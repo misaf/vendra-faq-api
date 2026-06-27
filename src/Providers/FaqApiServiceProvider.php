@@ -12,7 +12,8 @@ final class FaqApiServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
-        $package->name('vendra-faq-api');
+        $package->name('vendra-faq-api')
+            ->hasRoute('api');
     }
 
     public function packageBooted(): void
