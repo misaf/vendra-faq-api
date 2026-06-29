@@ -81,9 +81,16 @@ final class FaqSchema extends Schema
 
     private function getAttributeFilters(): array
     {
+        $locale = app()->getLocale();
+
         return [
-            Where::make('slug')
-                ->singular(),
+            Where::make('name', "name->{$locale}")
+                ->using('like')
+                ->deserializeUsing(fn(string $value): string => "%{$value}%"),
+
+            Where::make('slug', "slug->{$locale}")
+                ->using('like')
+                ->deserializeUsing(fn(string $value): string => "%{$value}%"),
 
             Where::make('status')
                 ->asBoolean(),
