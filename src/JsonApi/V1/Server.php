@@ -10,7 +10,7 @@ use Misaf\VendraFaqApi\JsonApi\V1\Faqs\FaqSchema;
 
 final class Server extends BaseServer
 {
-    protected string $baseUri = '/api/v1';
+    protected string $baseUri = '/v1';
 
     public function authorizable(): bool
     {

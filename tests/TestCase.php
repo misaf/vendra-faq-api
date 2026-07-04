@@ -8,17 +8,14 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Http;
 use LaravelJsonApi\Encoder\Neomerx\ServiceProvider as LaravelJsonApiEncoderServiceProvider;
 use LaravelJsonApi\Laravel\ServiceProvider as LaravelJsonApiServiceProvider;
-use LaravelJsonApi\Testing\MakesJsonApiRequests;
-use Misaf\VendraFaq\Providers\FaqServiceProvider;
-use Misaf\VendraFaqApi\JsonApi\VendraFaq\Server as VendraFaqServer;
+use Misaf\VendraApi\Providers\ApiServiceProvider;
+use Misaf\VendraFaqApi\JsonApi\V1\Server as VendraFaqServer;
 use Misaf\VendraFaqApi\Providers\FaqApiServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Override;
 
 abstract class TestCase extends OrchestraTestCase
 {
-    use MakesJsonApiRequests;
-
     #[Override]
     protected function setUp(): void
     {
@@ -61,14 +58,8 @@ abstract class TestCase extends OrchestraTestCase
         return [
             LaravelJsonApiEncoderServiceProvider::class,
             LaravelJsonApiServiceProvider::class,
-            FaqServiceProvider::class,
+            ApiServiceProvider::class,
             FaqApiServiceProvider::class,
         ];
-    }
-
-    #[Override]
-    protected function defineDatabaseMigrations(): void
-    {
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
     }
 }
