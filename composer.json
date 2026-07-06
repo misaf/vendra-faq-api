@@ -49,7 +49,11 @@
 	"prefer-stable": true,
 	"autoload": {
 		"psr-4": {
-			"Misaf\\VendraFaqApi\\": "src/",
+			"Misaf\\VendraFaqApi\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
 			"Misaf\\VendraFaqApi\\Tests\\": "tests/"
 		}
 	},
