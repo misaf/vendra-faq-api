@@ -5,9 +5,16 @@ declare(strict_types=1);
 namespace Misaf\VendraFaqApi\JsonApi\V1\Faqs;
 
 use LaravelJsonApi\Core\Resources\JsonApiResource;
+use Misaf\VendraFaq\Models\Faq;
 
+/**
+ * @mixin Faq
+ */
 final class FaqResource extends JsonApiResource
 {
+    /**
+     * @return iterable<string, mixed>
+     */
     public function attributes($request): iterable
     {
         return [
@@ -21,6 +28,9 @@ final class FaqResource extends JsonApiResource
         ];
     }
 
+    /**
+     * @return iterable<int, mixed>
+     */
     public function relationships($request): iterable
     {
         return [
