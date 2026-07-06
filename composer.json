@@ -27,7 +27,7 @@
 		"illuminate/support": "^13.0",
 		"misaf/vendra-api": "^1.0.0",
 		"misaf/vendra-faq": "dev-master",
-		"misaf/vendra-multimedia-api": "dev-master",
+		"misaf/vendra-multimedia-api": "^1.0.0",
 		"spatie/laravel-package-tools": "^1.0"
 	},
 	"require-dev": {
