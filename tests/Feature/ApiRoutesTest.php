@@ -3,9 +3,6 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
-use Misaf\VendraFaqApi\Tests\TestCase;
-
-pest()->extend(TestCase::class);
 
 it('registers faq api read routes', function (): void {
     expect(Route::has('vendra-faq.faqs.index'))->toBeTrue()
