@@ -4,7 +4,7 @@ The `misaf/vendra-faq-api` package exposes `misaf/vendra-faq` domain models thro
 
 ### Standards
 
-- Keep API code inside `app-modules/vendra-faq-api` using the `Misaf\VendraFaqApi` namespace.
+- Keep API code inside `packages/vendra-faq-api` using the `Misaf\VendraFaqApi` namespace.
 - Use this package for JSON:API servers, schemas, resources, query validators, API routes, service providers, and API tests.
 - Import domain models from `Misaf\VendraFaq`; do not duplicate persistence or domain behavior in the API module.
 - Keep Filament/admin UI in `misaf/vendra-faq`.
