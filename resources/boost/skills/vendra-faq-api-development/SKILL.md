@@ -1,13 +1,13 @@
 ---
 name: vendra-faq-api-development
-description: "Use this skill when creating, modifying, reviewing, or testing the Vendra FAQ API module in packages/vendra-faq-api, or when creating future API modules that expose domain modules through Laravel JSON:API. Trigger for JsonApi/V1 servers, schemas, resources, collection queries, resource queries, JSON:API routes, include paths, filters, pagination, sortables, API relationships, API tests, and package service provider wiring."
+description: "Use this skill when creating, modifying, reviewing, or testing the Vendra FAQ API module in packages/vendra-faq-api. Trigger for JsonApi/V1 servers, schemas, resources, collection queries, resource queries, JSON:API routes, include paths, filters, pagination, sortables, API relationships, API tests, and package service provider wiring."
 ---
 
 # Vendra FAQ API
 
-## Required Context
+## Workflow
 
-Always use this skill together with `modular` for module structure, `laravel-best-practices` for Laravel PHP, and `pest-testing` when tests are added or changed.
+Always use this skill together with `laravel-best-practices` for Laravel PHP and `pest-testing` when tests are added or changed.
 
 Before code changes, use Laravel Boost `application-info` and `search-docs` for Laravel, testing, and any API packages involved. Prefer Boost tools for route, database, and error inspection.
 
@@ -18,7 +18,7 @@ Treat `packages/vendra-faq-api` as the JSON:API layer for `misaf/vendra-faq`.
 - Use namespace `Misaf\VendraFaqApi`.
 - Keep API servers, schemas, API resources, query validators, routes, service providers, and API tests inside this module.
 - Import domain models from `Misaf\VendraFaq`; do not duplicate domain models or persistence logic in the API module.
-- Respect the domain module's tenant awareness and stay tenant-agnostic: tenancy is inherited from the domain models, which derive it from the bound `TenantResolver` in `misaf/vendra-support`. Add no API tenant toggle and never reference a concrete tenant provider such as `Misaf\VendraTenant` (servers, schemas, queries, routes, or tests). The API must build and run whether or not a tenant provider is installed.
+- Keep production API code tenant-provider agnostic: inherit tenancy from the domain models and add no API tenant toggle or `Misaf\VendraTenant` reference in servers, schemas, queries, or routes. Feature tests may use a concrete tenant factory solely to establish tenant context; keep the architecture rule scoped to `Misaf\VendraFaqApi`.
 - Keep Filament/admin UI out of this module.
 - Keep dependencies explicit in `composer.json`; do not add or change package dependencies without approval.
 
@@ -29,7 +29,7 @@ Follow the current `JsonApi/V1` layout.
 - Register routes in `routes/api.php` with `JsonApiRoute::server('vendra-faq')->prefix('v1')`.
 - Use `JsonApiController` for standard resource endpoints.
 - Keep resource type names kebab-case and stable, for example `faqs`, `faq-categories`.
-- Register schemas in `JsonApi\V1\Server::allSchemas()`.
+- Register `FaqCategorySchema`, `FaqSchema`, and `MultimediaSchema` in `JsonApi\V1\Server::allSchemas()`. The FAQ multimedia relationships and include paths require the multimedia schema on the same server.
 - Keep `authorizable()` behavior intentional; do not silently enable or disable authorization.
 - Use schema classes for fields, relationships, filters, pagination, and sortables.
 
