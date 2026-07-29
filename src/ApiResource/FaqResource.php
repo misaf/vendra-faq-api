@@ -15,18 +15,19 @@ use ApiPlatform\Metadata\McpToolCollection;
 use ApiPlatform\Metadata\QueryParameter;
 use Misaf\VendraApi\ApiResource\McpCollectionInput;
 use Misaf\VendraApi\ApiResource\McpResourceIdentifierInput;
+use Misaf\VendraApi\ApiResource\ResourceReference;
 use Misaf\VendraApi\Eloquent\Filter\LocalizedEqualsFilter;
 use Misaf\VendraApi\Eloquent\Filter\LocalizedSearchFilter;
-use Misaf\VendraFaqApi\State\HelpResourceProvider;
+use Misaf\VendraFaqApi\State\FaqResourceProvider;
 use Misaf\VendraMultimediaApi\ApiResource\MultimediaResource;
 
 #[ApiResource(
     shortName: 'Faq',
     operations: [
-        new Get(uriTemplate: '/content/faqs/{id}', provider: HelpResourceProvider::class),
+        new Get(uriTemplate: '/content/faqs/{id}', provider: FaqResourceProvider::class),
         new GetCollection(
             uriTemplate: '/content/faqs',
-            provider: HelpResourceProvider::class,
+            provider: FaqResourceProvider::class,
             order: ['position' => 'ASC'],
             parameters: [
                 'categoryId'      => new QueryParameter(key: 'categoryId', property: 'faq_category_id', filter: EqualsFilter::class, constraints: ['integer', 'min:1']),
@@ -46,12 +47,12 @@ use Misaf\VendraMultimediaApi\ApiResource\MultimediaResource;
         'get_faq' => new McpTool(
             description: 'Get an active FAQ with its category and media by identifier.',
             input: McpResourceIdentifierInput::class,
-            provider: HelpResourceProvider::class,
+            provider: FaqResourceProvider::class,
         ),
         'list_faqs' => new McpToolCollection(
             description: 'List active FAQs with their categories and media.',
             input: McpCollectionInput::class,
-            provider: HelpResourceProvider::class,
+            provider: FaqResourceProvider::class,
         ),
     ],
 )]
@@ -71,7 +72,7 @@ final readonly class FaqResource
         public array $slugs,
         public int $position,
         public bool $active,
-        public FaqCategoryResource $topic,
+        public ResourceReference $faqCategory,
         public array $multimedia,
         public string $createdAt,
         public string $updatedAt,
